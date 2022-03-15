@@ -16,41 +16,38 @@ Font_Suffix="\033[0m";
 LOG_FILE="check.log";
 
 clear;
-echo -e "流媒体解锁测试" && echo -e "流媒体解锁测试" > ${LOG_FILE};
-echo -e "${Font_Purple}提示 本工具测试结果仅供参考，请以实际使用为准${Font_Suffix}" && echo -e "提示 本工具测试结果仅供参考，请以实际使用为准" >> ${LOG_FILE};
-echo -e "${Font_Yellow}流媒体合租平台 https://jcnf.xyz/nf${Font_Suffix}" && echo -e "流媒体合租平台 https://jcnf.xyz/nf" >> ${LOG_FILE};
-echo -e " ** 当前版本: v${shell_version}" && echo -e " ** 当前版本: v${shell_version}" >> ${LOG_FILE};
-echo -e " ** 系统时间: $(date)" && echo -e " ** 系统时间: $(date)" >> ${LOG_FILE};
+echo -e "Streaming Unlock Test" && echo -e "Streaming Unlock Test" > ${LOG_FILE};
+echo -e "${Font_Purple}Tips: The test results of this tool are for reference only, please refer to the actual use.${Font_Suffix}" && echo -e "Tips The test results of this tool are for reference only, please refer to the actual use." >> ${LOG_FILE};
+echo -e " ** current version: v${shell_version}" && echo -e " ** current version: v${shell_version}" >> ${LOG_FILE};
+echo -e " ** system time: $(date)" && echo -e " ** system time: $(date)" >> ${LOG_FILE};
 
-export LANG="en_US";
-export LANGUAGE="en_US";
-export LC_ALL="en_US";
+#export LANG="en_US";
+#export LANGUAGE="en_US";
+#export LC_ALL="en_US";
 
 function InstallJQ() {
-    #安装JQ
+    #Install JQ
     if [ -e "/etc/redhat-release" ];then
-        echo -e "${Font_Green}正在安装依赖: epel-release${Font_Suffix}";
+        echo -e "${Font_Green}installing dependencies: epel-release${Font_Suffix}";
         yum install epel-release -y -q > /dev/null;
-        echo -e "${Font_Green}正在安装依赖: jq${Font_Suffix}";
+        echo -e "${Font_Green}installing dependencies: jq${Font_Suffix}";
         yum install jq -y -q > /dev/null;
         elif [[ $(cat /etc/os-release | grep '^ID=') =~ ubuntu ]] || [[ $(cat /etc/os-release | grep '^ID=') =~ debian ]];then
-        echo -e "${Font_Green}正在更新软件包列表...${Font_Suffix}";
+        echo -e "${Font_Green}Updating package list...${Font_Suffix}";
         apt-get update -y > /dev/null;
-        echo -e "${Font_Green}正在安装依赖: jq${Font_Suffix}";
+        echo -e "${Font_Green}installing dependencies: jq${Font_Suffix}";
         apt-get install jq -y > /dev/null;
         elif [[ $(cat /etc/issue | grep '^ID=') =~ alpine ]];then
         apk update > /dev/null;
-        echo -e "${Font_Green}正在安装依赖: jq${Font_Suffix}";
+        echo -e "${Font_Green}installing dependencies: jq${Font_Suffix}";
         apk add jq > /dev/null;
     else
-        echo -e "${Font_Red}请手动安装jq${Font_Suffix}";
+        echo -e "${Font_Red}Please install manually jq${Font_Suffix}";
         exit;
     fi
 }
 
 function PharseJSON() {
-    # 使用方法: PharseJSON "要解析的原JSON文本" "要解析的键值"
-    # Example: PharseJSON ""Value":"123456"" "Value" [返回结果: 123456]
     echo -n $1 | jq -r .$2;
 }
 
@@ -64,9 +61,9 @@ function PasteBin_Upload() {
         --data "expiration=${PASTEBIN_EXPIRATION:-}" \
     --data "syntax=${PASTEBIN_SYNTAX:-text}")"
     if [ "$?" = "0" ]; then
-        echo -e "${Font_Green}已生成报告 ${uploadresult} ${Font_Suffix}";
+        echo -e "${Font_Green}report generated ${uploadresult} ${Font_Suffix}";
     else
-        echo -e "${Font_Red}生成报告失败 ${Font_Suffix}";
+        echo -e "${Font_Red}Failed to generate report ${Font_Suffix}";
     fi
 }
 
@@ -570,12 +567,11 @@ function ISP(){
 
 function MediaUnlockTest() {
     ISP ${1};
-    MediaUnlockTest_HBONow ${1};
     #MediaUnlockTest_BBC ${1};
     
     #MediaUnlockTest_MyTVSuper ${1};
     #MediaUnlockTest_NowE ${1};
-    MediaUnlockTest_ViuTV ${1};
+    #MediaUnlockTest_ViuTV ${1};
     #MediaUnlockTest_BahamutAnime ${1};
     #MediaUnlockTest_BilibiliChinaMainland ${1};
     #MediaUnlockTest_BilibiliHKMCTW ${1};
@@ -589,11 +585,13 @@ function MediaUnlockTest() {
     #MediaUnlockTest_UMAJP ${1};
     #MediaUnlockTest_Kancolle ${1};
     
-    MediaUnlockTest_Dazn ${1};
+    #MediaUnlockTest_Dazn ${1};
     MediaUnlockTest_Netflix ${1};
     MediaUnlockTest_YouTube_Region ${1};
     MediaUnlockTest_DisneyPlus ${1};
+    MediaUnlockTest_HBONow ${1};
     GameTest_Steam ${1};
+    
 }
 
 curl -V > /dev/null 2>&1;
@@ -606,12 +604,12 @@ jq -V > /dev/null 2>&1;
 if [ $? -ne 0 ];then
     InstallJQ;
 fi
-echo " ** 正在测试IPv4解锁情况" && echo " ** 正在测试IPv4解锁情况" >> ${LOG_FILE};
+echo " ** Testing IPv4 unlocking" && echo " ** Testing IPv4 unlocking" >> ${LOG_FILE};
 check4=`ping 1.1.1.1 -c 1 2>&1`;
 if [[ "$check4" != *"unreachable"* ]] && [[ "$check4" != *"Unreachable"* ]];then
     MediaUnlockTest 4;
 else
-    echo -e "${Font_SkyBlue}当前主机不支持IPv4,跳过...${Font_Suffix}" && echo "当前主机不支持IPv4,跳过..." >> ${LOG_FILE};
+    echo -e "${Font_SkyBlue}The current host does not support IPv4, skip...${Font_Suffix}" && echo "The current host does not support IPv4, skip..." >> ${LOG_FILE};
 fi
 
 #echo " ** 正在测试IPv6解锁情况" && echo " ** 正在测试IPv6解锁情况" >> ${LOG_FILE};
