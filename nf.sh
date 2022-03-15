@@ -16,10 +16,11 @@ Font_Suffix="\033[0m";
 LOG_FILE="check.log";
 
 clear;
-echo -e "Streaming Unlock Test" && echo -e "Streaming Unlock Test" > ${LOG_FILE};
+echo -e "Streaming Region Test:" && echo -e "Streaming Region Test:" > ${LOG_FILE};
 echo -e "${Font_Purple}Tips: The test results of this tool are for reference only, please refer to the actual use.${Font_Suffix}" && echo -e "Tips The test results of this tool are for reference only, please refer to the actual use." >> ${LOG_FILE};
 echo -e " ** current version: v${shell_version}" && echo -e " ** current version: v${shell_version}" >> ${LOG_FILE};
 echo -e " ** system time: $(date)" && echo -e " ** system time: $(date)" >> ${LOG_FILE};
+echo -e "";
 
 #export LANG="en_US";
 #export LANGUAGE="en_US";
