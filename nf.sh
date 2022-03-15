@@ -571,23 +571,23 @@ function ISP(){
 function MediaUnlockTest() {
     ISP ${1};
     MediaUnlockTest_HBONow ${1};
-    MediaUnlockTest_BBC ${1};
+    #MediaUnlockTest_BBC ${1};
     
-    MediaUnlockTest_MyTVSuper ${1};
-    MediaUnlockTest_NowE ${1};
+    #MediaUnlockTest_MyTVSuper ${1};
+    #MediaUnlockTest_NowE ${1};
     MediaUnlockTest_ViuTV ${1};
-    MediaUnlockTest_BahamutAnime ${1};
-    MediaUnlockTest_BilibiliChinaMainland ${1};
-    MediaUnlockTest_BilibiliHKMCTW ${1};
-    MediaUnlockTest_BilibiliTW ${1};
+    #MediaUnlockTest_BahamutAnime ${1};
+    #MediaUnlockTest_BilibiliChinaMainland ${1};
+    #MediaUnlockTest_BilibiliHKMCTW ${1};
+    #MediaUnlockTest_BilibiliTW ${1};
     
-    MediaUnlockTest_AbemaTV_IPTest ${1};
-    MediaUnlockTest_Paravi ${1};
-    MediaUnlockTest_UNext ${1};
-    MediaUnlockTest_HuluJP ${1};
-    MediaUnlockTest_PCRJP ${1};
-    MediaUnlockTest_UMAJP ${1};
-    MediaUnlockTest_Kancolle ${1};
+    #MediaUnlockTest_AbemaTV_IPTest ${1};
+    #MediaUnlockTest_Paravi ${1};
+    #MediaUnlockTest_UNext ${1};
+    #MediaUnlockTest_HuluJP ${1};
+    #MediaUnlockTest_PCRJP ${1};
+    #MediaUnlockTest_UMAJP ${1};
+    #MediaUnlockTest_Kancolle ${1};
     
     MediaUnlockTest_Dazn ${1};
     MediaUnlockTest_Netflix ${1};
@@ -614,13 +614,13 @@ else
     echo -e "${Font_SkyBlue}当前主机不支持IPv4,跳过...${Font_Suffix}" && echo "当前主机不支持IPv4,跳过..." >> ${LOG_FILE};
 fi
 
-echo " ** 正在测试IPv6解锁情况" && echo " ** 正在测试IPv6解锁情况" >> ${LOG_FILE};
-check6=`ping6 240c::6666 -c 1 2>&1`;
-if [[ "$check6" != *"unreachable"* ]] && [[ "$check6" != *"Unreachable"* ]];then
-    MediaUnlockTest 6;
-else
-    echo -e "${Font_SkyBlue}当前主机不支持IPv6,跳过...${Font_Suffix}" && echo "当前主机不支持IPv6,跳过..." >> ${LOG_FILE};
-fi
-echo -e "";
-echo -e "${Font_Green}本次测试结果已保存到 ${LOG_FILE} ${Font_Suffix}";
-cat ${LOG_FILE} | PasteBin_Upload;
+#echo " ** 正在测试IPv6解锁情况" && echo " ** 正在测试IPv6解锁情况" >> ${LOG_FILE};
+#check6=`ping6 240c::6666 -c 1 2>&1`;
+#if [[ "$check6" != *"unreachable"* ]] && [[ "$check6" != *"Unreachable"* ]];then
+#    MediaUnlockTest 6;
+#else
+#    echo -e "${Font_SkyBlue}当前主机不支持IPv6,跳过...${Font_Suffix}" && echo "当前主机不支持IPv6,跳过..." >> ${LOG_FILE};
+#fi
+#echo -e "";
+#echo -e "${Font_Green}本次测试结果已保存到 ${LOG_FILE} ${Font_Suffix}";
+#cat ${LOG_FILE} | PasteBin_Upload;
