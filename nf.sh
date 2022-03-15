@@ -555,7 +555,7 @@ function MediaUnlockTest_Paravi() {
 
 function ISP(){
     #local result=`curl -sSL -${1} "https://api.ip.sb/geoip" 2>&1`;
-    local result=$(curl $useNIC -s -4 --max-time 10 https://api.ip.sb/geoip/${1} | cut -f1 -d"," | cut -f4 -d '"');
+    local result=$(curl $useNIC -s -4 --max-time 10 https://api.ip.sb/geoip/${1});
     if [[ "$result" == "curl"* ]];then
         return
     fi
