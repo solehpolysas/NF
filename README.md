@@ -3,5 +3,5 @@
 
 **Run**
 
-    bash <(curl -sSL https://raw.githubusercontent.com/Netflixxp/NF/main/nf.sh)
+    bash <(curl -sSL https://raw.githubusercontent.com/solehpolysas/NF/main/nf.sh)
 
